@@ -2,7 +2,7 @@
 <!DOCTYPE package SYSTEM "../package.dtd">
 <!-- do not use the "Type" attribute here, that one is only for
      generated package.xml files -->
-<!-- $Id: package.xml,v 1.4 2003-01-02 09:54:10 jmcastagnetto Exp $ -->
+<!-- $Id: package.xml,v 1.5 2003-01-17 23:23:00 jmcastagnetto Exp $ -->
 <package>
 
   <name>Math_Quaternion</name>
@@ -37,10 +37,12 @@
 
   <release>
     <license>PHP</license>
-    <version>0.7</version>
-    <date>2003-01-02</date>
+    <version>0.7.1</version>
+    <date>2003-01-17</date>
     <notes>
-       Quaternion manipulation package. Initial release under PEAR.
+       Quaternion manipulation package. 
+							Typo fix: examples were using Math_QuaternionOp::negative() instead of
+							Math_QuaternionOp::negate()
     </notes>
     <state>beta</state>
     <filelist>
@@ -59,6 +61,10 @@
   </release>
   <changelog>
     <release>
+					<date>2003-01-02</date>
+					<notes>
+							Quaternion manipulation package. Initial release under PEAR.
+					</notes>
     </release>
   </changelog>
 </package>

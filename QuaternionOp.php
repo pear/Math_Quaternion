@@ -34,10 +34,10 @@ include_once 'Math/Quaternion.php';
  * $a = new Math_Quaternion(2,4,2,-0.5);
  * $b = new Math_Quaternion(1,2,3,0.5);
  * 
- * if (!Math_QuaternionOp::areEqual($a, Math_QuaternionOp::negative($a))) {
+ * if (!Math_QuaternionOp::areEqual($a, Math_QuaternionOp::negate($a))) {
  *     echo "a and neg(a) are different\n";
  * }
- * $t=Math_QuaternionOp::negative($a);
+ * $t=Math_QuaternionOp::negate($a);
  * echo "Neg(a) is ".$t->toString()."\n";
  * $t=Math_QuaternionOp::conjugate($a);
  * echo "Conj(a) is ".$t->toString()."\n";

@@ -21,8 +21,8 @@ echo "real(a): ".$a->getReal()."\nimag(a): ";
 
 print_r($a->getAllIm());
 
-if (!Math_QuaternionOp::areEqual($a, Math_QuaternionOp::negative($a))) {echo "a and neg(a) are different\n";}
-$t=Math_QuaternionOp::negative($a);
+if (!Math_QuaternionOp::areEqual($a, Math_QuaternionOp::negate($a))) {echo "a and neg(a) are different\n";}
+$t=Math_QuaternionOp::negate($a);
 echo "Neg(a) is ".$t->toString()."\n";
 $t=Math_QuaternionOp::conjugate($a);
 echo "Conj(a) is ".$t->toString()."\n";
