@@ -112,7 +112,7 @@ class Math_QuaternionOp {/*{{{*/
 		if (function_exists('is_a')) {
 			return is_a($q1, 'math_quaternion');
 		} else {
-			return (get_class($q1) == 'math_quaternion' 
+			return (strtolower(get_class($q1)) == 'math_quaternion' 
 			        || is_subclass_of($q1, 'math_quaternion'));
 		}
 	}/*}}}*/
