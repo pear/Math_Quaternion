@@ -44,8 +44,43 @@ include_once "PEAR.php";
  * 
  * Originally this class was part of NumPHP (Numeric PHP package)
  *
+ * Example:
+ * <pre>
+ * require_once 'Math/Quaternion.php';
+ * 
+ * $a = new Math_Quaternion(2,4,2,-0.5);
+ * $b = new Math_Quaternion(1,2,3,0.5);
+ * 
+ * echo "a: ".$a->toString()."\n";
+ * echo "b: ".$b->toString()."\n";
+ * $t = Math_QuaternionOp::conjugate($a);
+ * echo "a': ".$t->toString()."\n";
+ * $t = Math_QuaternionOp::conjugate($b);
+ * echo "b': ".$t->toString()."\n";
+ * echo "length(a): ".$a->length()."  length2(a): ".$a->length2()."\n";
+ * echo "real(a): ".$a->getReal()."\nimag(a): ";
+ * 
+ * print_r($a->getAllIm());
+ * </pre>
+ * 
+ * Output from example:
+ * <pre>
+ * a: 2 + 4i + 2j + -0.5k
+ * b: 1 + 2i + 3j + 0.5k
+ * a': 2 + -4i + -2j + 0.5k
+ * b': 1 + -2i + -3j + -0.5k
+ * length(a): 4.9244289008981  length2(a): 24.25
+ * real(a): 2
+ * imag(a): Array
+ * (
+ *     [i] => 4
+ *     [j] => 2
+ *     [k] => -0.5
+ * )
+ * </pre>
+ * 
  * @author  Jesus M. Castagnetto <jmcastagnetto@php.net>
- * @version 0.9
+ * @version 0.7
  * @access  public
  * @package Math_Quaternion
  */
@@ -106,9 +141,14 @@ class Math_Quaternion {/*{{{*/
 	 * @return string
 	 * @access public
 	 */
-	function toString () {/*{{{*/
-		return ( $this->getReal()." + ".$this->getI()."i + ".
-		         $this->getJ()."j + ".$this->getK()."k");
+	function toString ($fmt = 'number') {/*{{{*/
+		if ($fmt == 'vector') {
+			return '[ '.$this->getReal().' '.$this->getI()
+					.' '.$this->getJ().' '.$this->getK().' ]';
+		} else {
+			return ( $this->getReal()." + ".$this->getI()."i + ".
+					 $this->getJ()."j + ".$this->getK()."k");
+		}
 	}/*}}}*/
 
 	/**

@@ -22,16 +22,21 @@
 
   <release>
     <license>PHP</license>
-    <version>0.8</version>
+    <version>0.7</version>
     <date>2002-11-27</date>
     <notes>
-       Initial release under PEAR.
+       Quaternion manipulation package. Initial release under PEAR.
     </notes>
     <state>beta</state>
     <filelist>
       <dir name="/" baseinstalldir="Math">
        <file role="php">Quaternion.php</file>
        <file role="php">QuaternionOp.php</file>
+       <dir name="test" role="test">
+        <file role="php">testMath_Quaternion.php</file>
+        <file role="php">test_cwt.php</file>
+        <file role="php">test_cwt.exp</file>
+       </dir>
       </dir>
     </filelist>
     <deps>

@@ -1,12 +1,11 @@
 <?php
 
-/*
- * To test class.quaternion.php
- * numPHP (c) Jesus M. Castagnetto 1999,2000.
+/**
+ * To test Math_Quaternion
  * $Id$
  */
 
-require_once 'QuaternionOp.php';
+require_once 'Math/QuaternionOp.php';
 
 $a = new Math_Quaternion(2,4,2,-0.5);
 $b = new Math_Quaternion(1,2,3,0.5);
