@@ -2,6 +2,7 @@
 <!DOCTYPE package SYSTEM "../package.dtd">
 <!-- do not use the "Type" attribute here, that one is only for
      generated package.xml files -->
+<!-- $Id: package.xml,v 1.4 2003-01-02 09:54:10 jmcastagnetto Exp $ -->
 <package>
 
   <name>Math_Quaternion</name>
