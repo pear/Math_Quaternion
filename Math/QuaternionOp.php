@@ -101,195 +101,199 @@ include_once 'Math/Quaternion.php';
  */
 class Math_QuaternionOp {/*{{{*/
 
-	/**
-	 * Whether the object is a Math_Quaternion instance
-	 *
-	 * @param object Math_Quaternion $q1
-	 * @return boolean TRUE if object is a Math_Quaternion, FALSE otherwise
-	 * @access public
-	 */
-	function isQuaternion (&$q1) {/*{{{*/
-		if (function_exists('is_a')) {
-			return is_a($q1, 'math_quaternion');
-		} else {
-			return (strtolower(get_class($q1)) == 'math_quaternion' 
-			        || is_subclass_of($q1, 'math_quaternion'));
-		}
-	}/*}}}*/
+    /**
+     * Whether the object is a Math_Quaternion instance
+     *
+     * @param object Math_Quaternion $q1
+     * @return boolean TRUE if object is a Math_Quaternion, FALSE otherwise
+     * @access public
+     */
+    function isQuaternion (&$q1) {/*{{{*/
+        if (function_exists('is_a')) {
+            return is_a($q1, 'math_quaternion');
+        } else {
+            return (strtolower(get_class($q1)) == 'math_quaternion' 
+                    || is_subclass_of($q1, 'math_quaternion'));
+        }
+    }/*}}}*/
 
-	/**
-	 * Calculate the conjugate of a quaternion
-	 *
-	 * @param object Math_Quaternion $q1
-	 * @return object a Math_Quaternion on success, PEAR_Error otherwise
-	 * @access public
-	 */
-	function &conjugate (&$q1) {/*{{{*/
-		if (!Math_QuaternionOp::isQuaternion($q1)) {
-			return PEAR::raiseError("Parameter needs to be a Math_Quaternion object");
-		}
-		$q2 = $q1->clone();
-		$q2->conjugate();
-		return $q2;
-	}/*}}}*/
-		
-	/**
-	 * Negates the given quaternion
-	 *
-	 * @param object Math_Quaternion $q1
-	 * @return object a Math_Quaternion on success, PEAR_Error otherwise
-	 * @access public
-	 */
-	function &negate (&$q1) {/*{{{*/
-		if (!Math_QuaternionOp::isQuaternion($q1)) {
-			return PEAR::raiseError("Parameter needs to be a Math_Quaternion object");
-		}
-		$q2 = $q1->clone();
-		$q2->negate();
-		return $q2;
-	}/*}}}*/
+    /**
+     * Calculate the conjugate of a quaternion
+     *
+     * @param object Math_Quaternion $q1
+     * @return object a Math_Quaternion on success, PEAR_Error otherwise
+     * @access public
+     */
+    function &conjugate (&$q1) {/*{{{*/
+        if (!Math_QuaternionOp::isQuaternion($q1)) {
+            return PEAR::raiseError("Parameter needs to be a Math_Quaternion object");
+        }
+        $q2 = $q1->makeClone();
+        $q2->conjugate();
+        return $q2;
+    }/*}}}*/
+        
+    /**
+     * Negates the given quaternion
+     *
+     * @param object Math_Quaternion $q1
+     * @return object a Math_Quaternion on success, PEAR_Error otherwise
+     * @access public
+     */
+    function &negate (&$q1) {/*{{{*/
+        if (!Math_QuaternionOp::isQuaternion($q1)) {
+            return PEAR::raiseError("Parameter needs to be a Math_Quaternion object");
+        }
+        $q2 = $q1->makeClone();
+        $q2->negate();
+        return $q2;
+    }/*}}}*/
 
-	/**
-	 * Inverts the given quaternion
-	 *
-	 * @param object Math_Quaternion $q1
-	 * @return object a Math_Quaternion on success, PEAR_Error otherwise
-	 * @access public
-	 * @see Math_QuaternionOp::multReal
-	 */
-	function &inverse (&$q1) {/*{{{*/
-		if (!Math_QuaternionOp::isQuaternion($q1)) {
-			return PEAR::raiseError("Parameter needs to be a Math_Quaternion object");
-		}
-		$c = Math_QuaternionOp::conjugate($q1);
-		$norm = $q1->norm();
-		if ($norm == 0) {
-			return PEAR::raiseError('Quaternion norm is zero, cannot calculate inverse');
-		}
-		$invmult = 1/$norm;
-		return Math_QuaternionOp::multReal($c, $invmult);
-	}/*}}}*/
+    /**
+     * Inverts the given quaternion
+     *
+     * @param object Math_Quaternion $q1
+     * @return object a Math_Quaternion on success, PEAR_Error otherwise
+     * @access public
+     * @see Math_QuaternionOp::multReal
+     */
+    function &inverse (&$q1) {/*{{{*/
+        if (!Math_QuaternionOp::isQuaternion($q1)) {
+            return PEAR::raiseError("Parameter needs to be a Math_Quaternion object");
+        }
+        $c = Math_QuaternionOp::conjugate($q1);
+        $norm = $q1->norm();
+        if ($norm == 0) {
+            return PEAR::raiseError('Quaternion norm is zero, cannot calculate inverse');
+        }
+        $invmult = 1/$norm;
+        return Math_QuaternionOp::multReal($c, $invmult);
+    }/*}}}*/
 
-	/**
-	 * Checks if two quaternions represent the same number
-	 *
-	 * @param object Math_Quaternion $q1
-	 * @param object Math_Quaternion $q2
-	 * @return mixed PEAR_Error on error, TRUE if q1 == q2, FALSE otherwise
-	 * @access public
-	 */
-	function areEqual (&$q1, &$q2) {/*{{{*/
-		if (!Math_QuaternionOp::isQuaternion($q1) || !Math_QuaternionOp::isQuaternion($q2)) {
-			return PEAR::raiseError("Parameters need to be Math_Quaternion objects");
-		}
-		return ( $q1->getReal() == $q2->getReal() && $q1->getI() == $q2->getI() &&
-				 $q1->getJ() == $q2->getJ() && $q1->getK() == $q2->getK() );
-	}/*}}}*/
+    /**
+     * Checks if two quaternions represent the same number
+     *
+     * @param object Math_Quaternion $q1
+     * @param object Math_Quaternion $q2
+     * @return mixed PEAR_Error on error, TRUE if q1 == q2, FALSE otherwise
+     * @access public
+     */
+    function areEqual (&$q1, &$q2) {/*{{{*/
+        if (!Math_QuaternionOp::isQuaternion($q1) || !Math_QuaternionOp::isQuaternion($q2)) {
+            return PEAR::raiseError("Parameters need to be Math_Quaternion objects");
+        }
+        return ( $q1->getReal() == $q2->getReal() && $q1->getI() == $q2->getI() &&
+                 $q1->getJ() == $q2->getJ() && $q1->getK() == $q2->getK() );
+    }/*}}}*/
 
-	/**
-	 * Adds two quaternions: q1 + q2
-	 *
-	 * @param object Math_Quaternion $q1
-	 * @param object Math_Quaternion $q2
-	 * @return object a Math_Quaternion on success, PEAR_Error otherwise
-	 * @access public
-	 */
-	function &add (&$q1, &$q2) {/*{{{*/
-		if (!Math_QuaternionOp::isQuaternion($q1) || !Math_QuaternionOp::isQuaternion($q2)) {
-			return PEAR::raiseError("Parameters need to be Math_Quaternion objects");
-		}
-		return 	new Math_Quaternion( $q1->getReal() + $q2->getReal(), $q1->getI() + $q2->getI(), 
-								$q1->getJ() + $q2->getJ(), $q1->getK() + $q2->getK() );
-	}/*}}}*/
+    /**
+     * Adds two quaternions: q1 + q2
+     *
+     * @param object Math_Quaternion $q1
+     * @param object Math_Quaternion $q2
+     * @return object a Math_Quaternion on success, PEAR_Error otherwise
+     * @access public
+     */
+    function &add (&$q1, &$q2) {/*{{{*/
+        if (!Math_QuaternionOp::isQuaternion($q1) || !Math_QuaternionOp::isQuaternion($q2)) {
+            return PEAR::raiseError("Parameters need to be Math_Quaternion objects");
+        }
+        $obj = new Math_Quaternion( $q1->getReal() + $q2->getReal(), $q1->getI() + $q2->getI(), 
+                                $q1->getJ() + $q2->getJ(), $q1->getK() + $q2->getK() );
 
-	/**
-	 * Substracts two quaternions: q1 - q2
-	 *
-	 * @param object Math_Quaternion $q1
-	 * @param object Math_Quaternion $q2
-	 * @return object a Math_Quaternion on success, PEAR_Error otherwise
-	 * @access public
-	 */
-	function &sub (&$q1, &$q2) {/*{{{*/
-		if (!Math_QuaternionOp::isQuaternion($q1) || !Math_QuaternionOp::isQuaternion($q2)) {
-			return PEAR::raiseError("Parameters need to be Math_Quaternion objects");
-		}
-		return Math_QuaternionOp::add($q1, Math_QuaternionOp::negate($q2));
-	}/*}}}*/
+        return $obj;
+    }/*}}}*/
 
-	/**
-	 * Multiplies two quaternions: q1 * q2
-	 * It uses a fast multiplication algorithm.
-	 *
-	 * @param object Math_Quaternion $q1
-	 * @param object Math_Quaternion $q2
-	 * @return object a Math_Quaternion on success, PEAR_Error otherwise
-	 * @access public
-	 */
-	function &mult (&$q1, &$q2) {/*{{{*/
-		if (!Math_QuaternionOp::isQuaternion($q1) || !Math_QuaternionOp::isQuaternion($q2)) {
-			return PEAR::raiseError("Parameters need to be Math_Quaternion objects");
-		}
-		// uses the fast multiplication algorithm
-		$a = $q1->getReal(); $q1im = $q1->getAllIm();
-		$b = $q1im["i"]; $c = $q1im["j"]; $d = $q1im["k"];
+    /**
+     * Substracts two quaternions: q1 - q2
+     *
+     * @param object Math_Quaternion $q1
+     * @param object Math_Quaternion $q2
+     * @return object a Math_Quaternion on success, PEAR_Error otherwise
+     * @access public
+     */
+    function &sub (&$q1, &$q2) {/*{{{*/
+        if (!Math_QuaternionOp::isQuaternion($q1) || !Math_QuaternionOp::isQuaternion($q2)) {
+            return PEAR::raiseError("Parameters need to be Math_Quaternion objects");
+        }
+        return Math_QuaternionOp::add($q1, Math_QuaternionOp::negate($q2));
+    }/*}}}*/
 
-		$x = $q2->getReal(); $q2im = $q2->getAllIm();
-		$y = $q2im["i"]; $z = $q2im["j"]; $w = $q2im["k"];
+    /**
+     * Multiplies two quaternions: q1 * q2
+     * It uses a fast multiplication algorithm.
+     *
+     * @param object Math_Quaternion $q1
+     * @param object Math_Quaternion $q2
+     * @return object a Math_Quaternion on success, PEAR_Error otherwise
+     * @access public
+     */
+    function &mult (&$q1, &$q2) {/*{{{*/
+        if (!Math_QuaternionOp::isQuaternion($q1) || !Math_QuaternionOp::isQuaternion($q2)) {
+            return PEAR::raiseError("Parameters need to be Math_Quaternion objects");
+        }
+        // uses the fast multiplication algorithm
+        $a = $q1->getReal(); $q1im = $q1->getAllIm();
+        $b = $q1im["i"]; $c = $q1im["j"]; $d = $q1im["k"];
 
-		$t0 = ($d - $c) * ($z - $w); 
-		$t1 = ($a + $b) * ($x + $y);
-		$t2 = ($a - $b) * ($z + $w);
-		$t3 = ($c + $d) * ($x - $y);
-		$t4 = ($d - $b) * ($y - $z);
-		$t5 = ($d + $b) * ($y + $z);
-		$t6 = ($a + $c) * ($x - $w);
-		$t7 = ($a - $c) * ($x + $w);
-		$t8 = $t5 + $t6 + $t7;
-		$t9 = 0.5 * ($t4 + $t8);
-		
-		$r = $t0 + $t9 - $t5;
-		$i = $t1 + $t9 - $t8;
-		$j = $t2 + $t9 - $t7;
-		$k = $t3 + $t9 - $t6;
+        $x = $q2->getReal(); $q2im = $q2->getAllIm();
+        $y = $q2im["i"]; $z = $q2im["j"]; $w = $q2im["k"];
 
-		return new Math_Quaternion($r, $i , $j, $k);
-	}/*}}}*/
+        $t0 = ($d - $c) * ($z - $w); 
+        $t1 = ($a + $b) * ($x + $y);
+        $t2 = ($a - $b) * ($z + $w);
+        $t3 = ($c + $d) * ($x - $y);
+        $t4 = ($d - $b) * ($y - $z);
+        $t5 = ($d + $b) * ($y + $z);
+        $t6 = ($a + $c) * ($x - $w);
+        $t7 = ($a - $c) * ($x + $w);
+        $t8 = $t5 + $t6 + $t7;
+        $t9 = 0.5 * ($t4 + $t8);
+        
+        $r = $t0 + $t9 - $t5;
+        $i = $t1 + $t9 - $t8;
+        $j = $t2 + $t9 - $t7;
+        $k = $t3 + $t9 - $t6;
 
-	/**
-	 * Divides two quaternions: q1 / q2
-	 *
-	 * @param object Math_Quaternion $q1
-	 * @param object Math_Quaternion $q2
-	 * @return object a Math_Quaternion on success, PEAR_Error otherwise
-	 * @access public
-	 */
-	function &div (&$q1, &$q2) {/*{{{*/
-		if (!Math_QuaternionOp::isQuaternion($q1) || !Math_QuaternionOp::isQuaternion($q2)) {
-			return PEAR::raiseError("Parameters need to be Math_Quaternion objects");
-		}
-		$i2 = Math_QuaternionOp::inverse($q2);
-		if (PEAR::isError($i2)) {
-			return $i2;
-		}
-		return Math_QuaternionOp::mult($i2, $q1);
-	}/*}}}*/
+        $obj = new Math_Quaternion($r, $i , $j, $k);
+        return $obj;
+    }/*}}}*/
 
-	/**
-	 * Multiplies a quaternion by a real number: q1 * realnum
-	 *
-	 * @param object Math_Quaternion $q1
-	 * @param float $realnum
-	 * @return object a Math_Quaternion on success, PEAR_Error otherwise
-	 * @access public
-	 */
-	function &multReal (&$q1, $realnum) {/*{{{*/
-		if (!Math_QuaternionOp::isQuaternion($q1) || !is_numeric($realnum)) {
-			return PEAR::raiseError("A Math_Quaternion object and a real number are needed");
-		}
-		return new Math_Quaternion ( $realnum * $q1->getReal(), $realnum * $q1->getI(),
-								$realnum * $q1->getJ(), $realnum * $q1->getK() );
-	}/*}}}*/
+    /**
+     * Divides two quaternions: q1 / q2
+     *
+     * @param object Math_Quaternion $q1
+     * @param object Math_Quaternion $q2
+     * @return object a Math_Quaternion on success, PEAR_Error otherwise
+     * @access public
+     */
+    function &div(&$q1, &$q2) {/*{{{*/
+        if (!Math_QuaternionOp::isQuaternion($q1) || !Math_QuaternionOp::isQuaternion($q2)) {
+            return PEAR::raiseError("Parameters need to be Math_Quaternion objects");
+        }
+        $i2 = Math_QuaternionOp::inverse($q2);
+        if (PEAR::isError($i2)) {
+            return $i2;
+        }
+        return Math_QuaternionOp::mult($i2, $q1);
+    }/*}}}*/
+
+    /**
+     * Multiplies a quaternion by a real number: q1 * realnum
+     *
+     * @param object Math_Quaternion $q1
+     * @param float $realnum
+     * @return object a Math_Quaternion on success, PEAR_Error otherwise
+     * @access public
+     */
+    function &multReal (&$q1, $realnum) {/*{{{*/
+        if (!Math_QuaternionOp::isQuaternion($q1) || !is_numeric($realnum)) {
+            return PEAR::raiseError("A Math_Quaternion object and a real number are needed");
+        }
+        $obj = new Math_Quaternion ( $realnum * $q1->getReal(), $realnum * $q1->getI(),
+                                $realnum * $q1->getJ(), $realnum * $q1->getK() );
+        return $obj;
+    }/*}}}*/
 
 }/*}}} end of Math_QuaternionOp */
 ?>
