@@ -1,70 +1,82 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.0">
-<!-- do not use the "Type" attribute here, that one is only for
-     generated package.xml files -->
-<!-- $Id: package.xml,v 1.8 2003-07-12 08:02:00 mj Exp $ -->
-<package>
-
-  <name>Math_Quaternion</name>
-  <summary>Classes that define Quaternions and their operations</summary>
-  <description>
-   Classes that represent and manipulate quaternions. Contain definitions
-   for basic arithmetic functions in a static class.
-
-   Quaternions are an extension of the idea of complex numbers, and
-   a quaternion is defined as: 
-
-       q = a + b*i + c*j + d*k
- 
-   In 1844 Hamilton described a system in which numbers were composed of
-   a real part and 3 imaginary and independent parts (i,j,k), such that:
-  
-       i^2 = j^2 = k^2 = -1       and
-       ij = k, jk = i, ki = j     and
-       ji = -k, kj = -i, ik = -j
-  
-   The above are known as "Hamilton's rules"
-  </description>
-
-  <maintainers>
-    <maintainer>
-      <user>jmcastagnetto</user>
-      <name>Jesus M. Castagnetto</name>
-      <email>jmcastagnetto@php.net</email>
-      <role>lead</role>
-    </maintainer>
-  </maintainers>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+http://pear.php.net/dtd/tasks-1.0.xsd
+http://pear.php.net/dtd/package-2.0
+http://pear.php.net/dtd/package-2.0.xsd">
+ <name>Math_Quaternion</name>
+ <channel>pear.php.net</channel>
+ <summary>Classes that define Quaternions and their operations</summary>
+ <description>Classes that represent and manipulate quaternions. Contain definitions
+for basic arithmetic functions in a static class.
+Quaternions are an extension of the idea of complex numbers, and
+a quaternion is defined as: 
+    q = a + b*i + c*j + d*k
+In 1844 Hamilton described a system in which numbers were composed of
+a real part and 3 imaginary and independent parts (i,j,k), such that:
+    i^2 = j^2 = k^2 = -1       and
+    ij = k, jk = i, ki = j     and
+    ji = -k, kj = -i, ik = -j
+The above are known as &quot;Hamilton&apos;s rules&quot;
+ </description>
+ <lead>
+  <name>Jesus M. Castagnetto</name>
+  <user>jmcastagnetto</user>
+  <email>jmcastagnetto@php.net</email>
+  <active>yes</active>
+ </lead>
+ <date>2010-10-03</date>
+ <time>00:53:56</time>
+ <version>
+  <release>0.7.1</release>
+  <api>0.7.1</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>beta</api>
+ </stability>
+ <license uri="http://www.php.net/license">PHP</license>
+ <notes>
+Quaternion manipulation package. 
+Typo fix: examples were using Math_QuaternionOp::negative() instead of
+Math_QuaternionOp::negate()
+ </notes>
+ <contents>
+  <dir baseinstalldir="/" name="/">
+   <dir name="test">
+    <file baseinstalldir="Math" name="testMath_Quaternion.php" role="php" />
+    <file baseinstalldir="Math" name="test_cwt.exp" role="php" />
+    <file baseinstalldir="Math" name="test_cwt.php" role="php" />
+   </dir> <!-- //test -->
+   <file baseinstalldir="Math" name="Quaternion.php" role="php" />
+   <file baseinstalldir="Math" name="QuaternionOp.php" role="php" />
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>4.0.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0b1</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
   <release>
-    <license>PHP</license>
-    <version>0.7.1</version>
-    <date>2003-01-17</date>
-    <notes>
-      Quaternion manipulation package. 
-      Typo fix: examples were using Math_QuaternionOp::negative() instead of
-      Math_QuaternionOp::negate()
-    </notes>
-    <state>beta</state>
-    <filelist>
-      <dir name="/" baseinstalldir="Math">
-       <file role="php">Quaternion.php</file>
-       <file role="php">QuaternionOp.php</file>
-       <dir name="test" role="test">
-        <file role="php">testMath_Quaternion.php</file>
-        <file role="php">test_cwt.php</file>
-        <file role="php">test_cwt.exp</file>
-       </dir>
-      </dir>
-    </filelist>
-    <deps>
-    </deps>
+   <version>
+    <release />
+    <api />
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-01-02</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>
+Quaternion manipulation package. Initial release under PEAR.
+   </notes>
   </release>
-  <changelog>
-    <release>
-     <date>2003-01-02</date>
-     <notes>
-      Quaternion manipulation package. Initial release under PEAR.
-     </notes>
-    </release>
-  </changelog>
+ </changelog>
 </package>
