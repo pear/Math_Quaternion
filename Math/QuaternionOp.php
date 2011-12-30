@@ -19,8 +19,8 @@
 // $Id$
 //
 
-include_once 'PEAR.php';
-include_once 'Math/Quaternion.php';
+require_once 'PEAR.php';
+require_once 'Math/Quaternion.php';
 
 /**
  * Math_QuaternionOp: class that implements operations on quaternions
@@ -30,10 +30,10 @@ include_once 'Math/Quaternion.php';
  * Example:
  * <pre>
  * require_once 'Math/QuaternionOp.php';
- * 
+ *
  * $a = new Math_Quaternion(2,4,2,-0.5);
  * $b = new Math_Quaternion(1,2,3,0.5);
- * 
+ *
  * if (!Math_QuaternionOp::areEqual($a, Math_QuaternionOp::negate($a))) {
  *     echo "a and neg(a) are different\n";
  * }
@@ -45,7 +45,7 @@ include_once 'Math/Quaternion.php';
  * echo "Inv(a) is ".$t->toString()."\n";
  * $t=Math_QuaternionOp::multReal($a, 1.23);
  * echo "MultReal(a, 1.23) is ".$t->toString()."\n";
- * 
+ *
  * echo "====\n";
  * $t=Math_QuaternionOp::mult($a,$b);
  * echo "a*b: ".$t->toString()."\n";
@@ -108,11 +108,11 @@ class Math_QuaternionOp {/*{{{*/
      * @return boolean TRUE if object is a Math_Quaternion, FALSE otherwise
      * @access public
      */
-    function isQuaternion (&$q1) {/*{{{*/
+    public function static isQuaternion (&$q1) {/*{{{*/
         if (function_exists('is_a')) {
             return is_a($q1, 'math_quaternion');
         } else {
-            return (strtolower(get_class($q1)) == 'math_quaternion' 
+            return (strtolower(get_class($q1)) == 'math_quaternion'
                     || is_subclass_of($q1, 'math_quaternion'));
         }
     }/*}}}*/
@@ -132,7 +132,7 @@ class Math_QuaternionOp {/*{{{*/
         $q2->conjugate();
         return $q2;
     }/*}}}*/
-        
+
     /**
      * Negates the given quaternion
      *
@@ -198,7 +198,7 @@ class Math_QuaternionOp {/*{{{*/
         if (!Math_QuaternionOp::isQuaternion($q1) || !Math_QuaternionOp::isQuaternion($q2)) {
             return PEAR::raiseError("Parameters need to be Math_Quaternion objects");
         }
-        $obj = new Math_Quaternion( $q1->getReal() + $q2->getReal(), $q1->getI() + $q2->getI(), 
+        $obj = new Math_Quaternion( $q1->getReal() + $q2->getReal(), $q1->getI() + $q2->getI(),
                                 $q1->getJ() + $q2->getJ(), $q1->getK() + $q2->getK() );
 
         return $obj;
@@ -239,7 +239,7 @@ class Math_QuaternionOp {/*{{{*/
         $x = $q2->getReal(); $q2im = $q2->getAllIm();
         $y = $q2im["i"]; $z = $q2im["j"]; $w = $q2im["k"];
 
-        $t0 = ($d - $c) * ($z - $w); 
+        $t0 = ($d - $c) * ($z - $w);
         $t1 = ($a + $b) * ($x + $y);
         $t2 = ($a - $b) * ($z + $w);
         $t3 = ($c + $d) * ($x - $y);
@@ -249,7 +249,7 @@ class Math_QuaternionOp {/*{{{*/
         $t7 = ($a - $c) * ($x + $w);
         $t8 = $t5 + $t6 + $t7;
         $t9 = 0.5 * ($t4 + $t8);
-        
+
         $r = $t0 + $t9 - $t5;
         $i = $t1 + $t9 - $t8;
         $j = $t2 + $t9 - $t7;
