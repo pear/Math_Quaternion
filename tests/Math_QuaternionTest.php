@@ -1,9 +1,9 @@
 <?php
-require_once 'PHPUnit/Framework.php';
+require_once 'PHPUnit/Framework/TestCase.php';
 require_once 'Math/QuaternionOp.php';
 
 class Math_QuaternionTest extends PHPUnit_Framework_TestCase {
-    
+
 
     public function testChauWenTsengData() {
         // Using the data by Chau-Wen Tseng
