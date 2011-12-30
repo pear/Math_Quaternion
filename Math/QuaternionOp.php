@@ -19,7 +19,6 @@
 // $Id$
 //
 
-require_once 'PEAR.php';
 require_once 'Math/Quaternion.php';
 
 /**
@@ -121,7 +120,7 @@ class Math_QuaternionOp {/*{{{*/
      * Calculate the conjugate of a quaternion
      *
      * @param object Math_Quaternion $q1
-     * @return object a Math_Quaternion on success, PEAR_Error otherwise
+     * @return object a Math_Quaternion on success
      * @access public
      */
     public static function &conjugate (&$q1) {/*{{{*/
@@ -137,7 +136,7 @@ class Math_QuaternionOp {/*{{{*/
      * Negates the given quaternion
      *
      * @param object Math_Quaternion $q1
-     * @return object a Math_Quaternion on success, PEAR_Error otherwise
+     * @return object a Math_Quaternion on success
      * @access public
      */
     public static function &negate (&$q1) {/*{{{*/
@@ -153,7 +152,7 @@ class Math_QuaternionOp {/*{{{*/
      * Inverts the given quaternion
      *
      * @param object Math_Quaternion $q1
-     * @return object a Math_Quaternion on success, PEAR_Error otherwise
+     * @return object a Math_Quaternion on success
      * @access public
      * @see Math_QuaternionOp::multReal
      */
@@ -175,7 +174,7 @@ class Math_QuaternionOp {/*{{{*/
      *
      * @param object Math_Quaternion $q1
      * @param object Math_Quaternion $q2
-     * @return mixed PEAR_Error on error, TRUE if q1 == q2, FALSE otherwise
+     * @return mixed TRUE if q1 == q2, FALSE otherwise
      * @access public
      */
     public static function areEqual (&$q1, &$q2) {/*{{{*/
@@ -191,7 +190,7 @@ class Math_QuaternionOp {/*{{{*/
      *
      * @param object Math_Quaternion $q1
      * @param object Math_Quaternion $q2
-     * @return object a Math_Quaternion on success, PEAR_Error otherwise
+     * @return object a Math_Quaternion on success
      * @access public
      */
     public static function &add (&$q1, &$q2) {/*{{{*/
@@ -209,7 +208,7 @@ class Math_QuaternionOp {/*{{{*/
      *
      * @param object Math_Quaternion $q1
      * @param object Math_Quaternion $q2
-     * @return object a Math_Quaternion on success, PEAR_Error otherwise
+     * @return object a Math_Quaternion on success
      * @access public
      */
     public static function &sub (&$q1, &$q2) {/*{{{*/
@@ -225,7 +224,7 @@ class Math_QuaternionOp {/*{{{*/
      *
      * @param object Math_Quaternion $q1
      * @param object Math_Quaternion $q2
-     * @return object a Math_Quaternion on success, PEAR_Error otherwise
+     * @return object a Math_Quaternion on success
      * @access public
      */
     public static function &mult (&$q1, &$q2) {/*{{{*/
@@ -264,7 +263,7 @@ class Math_QuaternionOp {/*{{{*/
      *
      * @param object Math_Quaternion $q1
      * @param object Math_Quaternion $q2
-     * @return object a Math_Quaternion on success, PEAR_Error otherwise
+     * @return object a Math_Quaternion on success
      * @access public
      */
     public static function &div(&$q1, &$q2) {/*{{{*/
@@ -272,9 +271,7 @@ class Math_QuaternionOp {/*{{{*/
             throw new InvalidArgumentException("Parameters need to be Math_Quaternion objects");
         }
         $i2 = Math_QuaternionOp::inverse($q2);
-        if (PEAR::isError($i2)) {
-            return $i2;
-        }
+
         return Math_QuaternionOp::mult($i2, $q1);
     }/*}}}*/
 
@@ -283,7 +280,7 @@ class Math_QuaternionOp {/*{{{*/
      *
      * @param object Math_Quaternion $q1
      * @param float $realnum
-     * @return object a Math_Quaternion on success, PEAR_Error otherwise
+     * @return object a Math_Quaternion on success
      * @access public
      */
     public static function &multReal (&$q1, $realnum) {/*{{{*/
