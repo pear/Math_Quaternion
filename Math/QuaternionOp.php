@@ -108,7 +108,7 @@ class Math_QuaternionOp {/*{{{*/
      * @return boolean TRUE if object is a Math_Quaternion, FALSE otherwise
      * @access public
      */
-    public function static isQuaternion (&$q1) {/*{{{*/
+    public static function isQuaternion (&$q1) {/*{{{*/
         if (function_exists('is_a')) {
             return is_a($q1, 'math_quaternion');
         } else {
@@ -124,7 +124,7 @@ class Math_QuaternionOp {/*{{{*/
      * @return object a Math_Quaternion on success, PEAR_Error otherwise
      * @access public
      */
-    function &conjugate (&$q1) {/*{{{*/
+    public static function &conjugate (&$q1) {/*{{{*/
         if (!Math_QuaternionOp::isQuaternion($q1)) {
             return PEAR::raiseError("Parameter needs to be a Math_Quaternion object");
         }
@@ -140,7 +140,7 @@ class Math_QuaternionOp {/*{{{*/
      * @return object a Math_Quaternion on success, PEAR_Error otherwise
      * @access public
      */
-    function &negate (&$q1) {/*{{{*/
+    public static function &negate (&$q1) {/*{{{*/
         if (!Math_QuaternionOp::isQuaternion($q1)) {
             return PEAR::raiseError("Parameter needs to be a Math_Quaternion object");
         }
@@ -157,7 +157,7 @@ class Math_QuaternionOp {/*{{{*/
      * @access public
      * @see Math_QuaternionOp::multReal
      */
-    function &inverse (&$q1) {/*{{{*/
+    public static function &inverse (&$q1) {/*{{{*/
         if (!Math_QuaternionOp::isQuaternion($q1)) {
             return PEAR::raiseError("Parameter needs to be a Math_Quaternion object");
         }
@@ -178,7 +178,7 @@ class Math_QuaternionOp {/*{{{*/
      * @return mixed PEAR_Error on error, TRUE if q1 == q2, FALSE otherwise
      * @access public
      */
-    function areEqual (&$q1, &$q2) {/*{{{*/
+    public static function areEqual (&$q1, &$q2) {/*{{{*/
         if (!Math_QuaternionOp::isQuaternion($q1) || !Math_QuaternionOp::isQuaternion($q2)) {
             return PEAR::raiseError("Parameters need to be Math_Quaternion objects");
         }
@@ -194,7 +194,7 @@ class Math_QuaternionOp {/*{{{*/
      * @return object a Math_Quaternion on success, PEAR_Error otherwise
      * @access public
      */
-    function &add (&$q1, &$q2) {/*{{{*/
+    public static function &add (&$q1, &$q2) {/*{{{*/
         if (!Math_QuaternionOp::isQuaternion($q1) || !Math_QuaternionOp::isQuaternion($q2)) {
             return PEAR::raiseError("Parameters need to be Math_Quaternion objects");
         }
@@ -212,7 +212,7 @@ class Math_QuaternionOp {/*{{{*/
      * @return object a Math_Quaternion on success, PEAR_Error otherwise
      * @access public
      */
-    function &sub (&$q1, &$q2) {/*{{{*/
+    public static function &sub (&$q1, &$q2) {/*{{{*/
         if (!Math_QuaternionOp::isQuaternion($q1) || !Math_QuaternionOp::isQuaternion($q2)) {
             return PEAR::raiseError("Parameters need to be Math_Quaternion objects");
         }
@@ -228,7 +228,7 @@ class Math_QuaternionOp {/*{{{*/
      * @return object a Math_Quaternion on success, PEAR_Error otherwise
      * @access public
      */
-    function &mult (&$q1, &$q2) {/*{{{*/
+    public static function &mult (&$q1, &$q2) {/*{{{*/
         if (!Math_QuaternionOp::isQuaternion($q1) || !Math_QuaternionOp::isQuaternion($q2)) {
             return PEAR::raiseError("Parameters need to be Math_Quaternion objects");
         }
@@ -267,7 +267,7 @@ class Math_QuaternionOp {/*{{{*/
      * @return object a Math_Quaternion on success, PEAR_Error otherwise
      * @access public
      */
-    function &div(&$q1, &$q2) {/*{{{*/
+    public static function &div(&$q1, &$q2) {/*{{{*/
         if (!Math_QuaternionOp::isQuaternion($q1) || !Math_QuaternionOp::isQuaternion($q2)) {
             return PEAR::raiseError("Parameters need to be Math_Quaternion objects");
         }
@@ -286,7 +286,7 @@ class Math_QuaternionOp {/*{{{*/
      * @return object a Math_Quaternion on success, PEAR_Error otherwise
      * @access public
      */
-    function &multReal (&$q1, $realnum) {/*{{{*/
+    public static function &multReal (&$q1, $realnum) {/*{{{*/
         if (!Math_QuaternionOp::isQuaternion($q1) || !is_numeric($realnum)) {
             return PEAR::raiseError("A Math_Quaternion object and a real number are needed");
         }
